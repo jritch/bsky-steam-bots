@@ -2,7 +2,7 @@ name: Post new Steam releases
 
 on:
   schedule:
-    - cron: "7,37 * * * *"   # every 30 minutes (GitHub may delay scheduled runs)
+    - cron: "3-58/5 * * * *"   # every 30 minutes (GitHub may delay scheduled runs)
   workflow_dispatch:
     inputs:
       mode:
