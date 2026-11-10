@@ -49,6 +49,14 @@ jobs:
         run: |
           git config user.name "steam-bsky-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ ! -d state ]; then
+            echo "No state to save (dry run, or the bot stopped before saving)."
+            exit 0
+          fi
           git add state/
-          git diff --cached --quiet || git commit -m "Update seen games [skip ci]"
+          if git diff --cached --quiet; then
+            echo "State unchanged."
+            exit 0
+          fi
+          git commit -m "Update seen games [skip ci]"
           git push
