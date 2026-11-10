@@ -276,7 +276,7 @@ def compose_text(g: Game, ai_bot: bool, cfg: Config) -> str:
     head = g.name
     meta = []
     if g.developers:
-        head.append(" by " + ", ".join(g.developers[:2]))
+        head += " by " + ", ".join(g.developers[:2])
     if g.price:
         meta.append(g.price)
     if g.early_access:
