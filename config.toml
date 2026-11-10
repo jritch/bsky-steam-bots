@@ -1,0 +1,49 @@
+# Settings for the Steam -> Bluesky release bots.
+# Account credentials are NOT stored here; they come from environment
+# variables (GitHub Actions secrets). See README.md.
+
+[bots]
+# Turn either bot on or off without touching credentials.
+ai_disclosed_enabled = true      # games WITH an "AI Generated Content Disclosure"
+no_ai_disclosure_enabled = true  # games WITHOUT one
+
+[nsfw]
+# What to do with adult games:
+#   "skip"  - don't post them at all
+#   "label" - post them, but attach Bluesky's adult-content self-label so
+#             they are blurred / hidden per each viewer's moderation settings
+#   "post"  - post them like any other game (not recommended)
+mode = "skip"
+
+# Steam content descriptors that count as NSFW.
+#   1 = Some Nudity or Sexual Content
+#   2 = Frequent Violence or Gore        (not NSFW by default)
+#   3 = Adult Only Sexual Content
+#   4 = Frequent Nudity or Sexual Content
+#   5 = General Mature Content           (not NSFW by default)
+content_descriptors = [3, 4]
+
+# Steam tag ids that count as NSFW (tags are set by devs/players, so they
+# catch things the descriptors miss but also have false positives).
+#   12095 = Sexual Content, 6650 = Nudity, 9130 = Hentai
+#   24904 = NSFW (Valve has retired this tag; kept for older listings)
+#   65443 = Adult Content (not included by default; also covers strong language)
+tag_ids = [24904, 12095, 6650, 9130]
+
+[discovery]
+# How many of Steam's newest releases to scan each run (100 per page).
+scan_depth = 200
+# Only post games whose Steam release date is within this many days.
+# Stops old games that drift into the "newest" list from being posted.
+max_age_days = 3
+# Store region / language used for prices and text.
+country = "US"
+language = "english"
+
+[posting]
+# Safety cap per bot per run, so a backlog can't flood the feed.
+max_posts_per_run = 25
+# Seconds to wait between posts.
+delay_seconds = 3
+# Include the developer's AI disclosure text in AI-bot posts.
+quote_ai_disclosure = true
